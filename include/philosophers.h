@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/05/31 15:54:15 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:08:54 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 
 typedef struct s_struct
 {
-	int	philo;
-	int	fork;
-	int	tt_die;
-	int	tt_eat;
-	int	tt_sleep;
+	int				philo;
+	int				fork;
+	int				tt_die;
+	int				tt_eat;
+	int				tt_sleep;
+	pthread_t		*threads;
+	pthread_mutex_t	mutex;
 }	t_struct;
 
 /*---------MANDATORY---------*/

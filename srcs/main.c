@@ -6,39 +6,60 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/05/31 17:40:11 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:22:12 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*test(void)
+void	*print_hello(void *thread_id)
 {
-	printf(" salut");
-	return (0);
+	long			tid;
+	pthread_mutex_t	mutex;
+
+	pthread_mutex_init(&mutex, NULL);
+	tid = (long)thread_id;
+	pthread_mutex_lock(&mutex);
+	printf("Hello from thread %ld\n", tid);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
+	pthread_exit(NULL);
+}
+
+int	threads_join(t_struct *philo)
+{
+	int	ptj;
+	int	i;
+
+	i = 0;
+	while (i < philo->philo)
+	{
+		ptj = pthread_join(philo->threads[i], NULL);
+		i++;
+		if (ptj != 0)
+			return (0);
+	}
+	return (1);
 }
 
 void	philosophers(t_struct *philo)
 {
-	pthread_t	i;
-	int			j;
+	long		i;
+	int			ptc;
 
-	j = philo->philo;
-	i = (pthread_t)philo->philo;
-	while (j != 0)
+	philo->threads = malloc(sizeof(pthread_t) * philo->philo);
+	if (!philo->threads)
+		return ;
+	i = 0;
+	while (i < philo->philo)
 	{
-		printf("\nthread numero %ld :", i);
-		pthread_create(&i, NULL, test(), NULL);
-		j--;
-		i = (pthread_t)j;
+		ptc = pthread_create(&philo->threads[i], NULL, print_hello, (void *)i);
+		i++;
+		if (ptc != 0)
+			return ;
 	}
-	j = philo->philo;
-	while (j != 0)
-	{
-		pthread_join(i, NULL);
-		j--;
-		i = (pthread_t)j;
-	}
+	if (threads_join(philo) == 0)
+		return ;
 }
 
 void	init(char **argv)
@@ -62,5 +83,4 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv) == 0)
 		return (0);
 	init(argv);
-	write(1, "SALUT\n", 6);
 }
