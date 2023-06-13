@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/02 16:22:12 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:32:19 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	threads_join(t_struct *philo)
 	int	i;
 
 	i = 0;
-	while (i < philo->philo)
+	while (i < data->philo)
 	{
-		ptj = pthread_join(philo->threads[i], NULL);
+		ptj = pthread_join(data->threads[i]->thread, NULL);
 		i++;
 		if (ptj != 0)
 			return (0);
@@ -42,40 +42,43 @@ int	threads_join(t_struct *philo)
 	return (1);
 }
 
-void	philosophers(t_struct *philo)
+void	philosophers(t_struct *data, t_threads *philo)
 {
 	long		i;
 	int			ptc;
+	t_threads	*current;
 
-	philo->threads = malloc(sizeof(pthread_t) * philo->philo);
-	if (!philo->threads)
-		return ;
+	current = philo;
 	i = 0;
-	while (i < philo->philo)
+	while (i < data->philo)
 	{
-		ptc = pthread_create(&philo->threads[i], NULL, print_hello, (void *)i);
+		ptc = pthread_create(&current->thread, NULL, print_hello, (void *)i);
 		i++;
+		current->thread = current->next;
 		if (ptc != 0)
 			return ;
 	}
-	if (threads_join(philo) == 0)
+	if (threads_join(current) == 0)
 		return ;
 }
 
 void	init(char **argv)
 {
-	t_struct	*philo;
+	t_struct	*data;
+	t_threads	*philo;
 
-	philo = malloc(sizeof(t_struct));
-	if (!philo)
+	data = malloc(sizeof(t_struct));
+	if (!data)
 		return ;
-	philo->philo = ft_atoi(argv[1]);
-	philo->fork = ft_atoi(argv[1]);
-	philo->tt_die = ft_atoi(argv[2]);
-	philo->tt_eat = ft_atoi(argv[3]);
-	philo->tt_sleep = ft_atoi(argv[4]);
-	philosophers(philo);
-	free(philo);
+	data->philo = ft_atoi(argv[1]);
+	data->fork = ft_atoi(argv[1]);
+	data->tt_die = ft_atoi(argv[2]);
+	data->tt_eat = ft_atoi(argv[3]);
+	data->tt_sleep = ft_atoi(argv[4]);
+	philo = make_list(data);
+	philosophers(data, philo);
+	free(data);
+	free_list(philo);
 }
 
 int	main(int argc, char **argv)
@@ -84,3 +87,4 @@ int	main(int argc, char **argv)
 		return (0);
 	init(argv);
 }
+

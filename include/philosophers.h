@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/02 16:08:54 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:27:16 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <pthread.h>
 # include <stddef.h>
 
+typedef struct s_threads
+{
+	int					num;
+	pthread_t			thread;
+	struct t_threads	*next;
+}	t_threads;
+
 typedef struct s_struct
 {
 	int				philo;
@@ -27,14 +34,13 @@ typedef struct s_struct
 	int				tt_die;
 	int				tt_eat;
 	int				tt_sleep;
-	pthread_t		*threads;
 	pthread_mutex_t	mutex;
 }	t_struct;
 
 /*---------MANDATORY---------*/
 
 /*main.c*/
-void		philosophers(t_struct *philo);
+void		philosophers(t_struct *data, t_threads *philo);
 void		init(char **argv);
 int			main(int argc, char **argv);
 
@@ -47,5 +53,11 @@ int			ft_atoi(const char *nptr);
 int			sizestr(int n);
 char		*ft_itoa(int n);
 int			check_numbers(char **argv);
+
+/*list_maker.c*/
+t_threads	make_list(t_struct *data);
+void		*make_nod(int num);
+void		add_nod(t_list *head, t_list *new);
+void		free_list(t_list *head);
 
 #endif
