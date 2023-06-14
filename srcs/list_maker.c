@@ -6,29 +6,27 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/13 16:19:41 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/14 16:44:28 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_threads	make_list(t_struct *data)
+#include "philosophers.h"
+
+void	make_list(t_struct *data, t_threads **philo)
 {
 	int			i;
-	t_threads	*philo;
 
 	i = 0;
-	philo = make_nod(i);
-	if (!philo)
-		return (NULL);
+	*philo = make_nod(i);
 	while (++i <= data->philo)
-		add_nod(philo, make_nod(i));
-	return (philo);
+		add_nod(*philo, make_nod(i));
 }
 
 void	*make_nod(int num)
 {
-	t_list	*new;
+	t_threads	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_threads));
 	if (!new)
 		return (NULL);
 	new->num = num;
@@ -36,9 +34,9 @@ void	*make_nod(int num)
 	return (new);
 }
 
-void	add_nod(t_list *head, t_list *new)
+void	add_nod(t_threads *head, t_threads *new)
 {
-	t_list	*current;
+	t_threads	*current;
 
 	current = head;
 	while (current->next != NULL)
@@ -46,10 +44,10 @@ void	add_nod(t_list *head, t_list *new)
 	current->next = new;
 }
 
-void	free_list(t_list *head)
+void	free_list(t_threads *head)
 {
-	t_list	*current;
-	t_list	*next;
+	t_threads	*current;
+	t_threads	*next;
 
 	current = head;
 	while (current != NULL)

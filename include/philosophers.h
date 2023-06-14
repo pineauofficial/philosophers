@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/13 16:27:16 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/14 16:35:43 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_threads
 {
 	int					num;
 	pthread_t			thread;
-	struct t_threads	*next;
+	struct s_threads	*next;
 }	t_threads;
 
 typedef struct s_struct
@@ -40,7 +40,7 @@ typedef struct s_struct
 /*---------MANDATORY---------*/
 
 /*main.c*/
-void		philosophers(t_struct *data, t_threads *philo);
+void		philosophers(t_struct *data, t_threads **philo);
 void		init(char **argv);
 int			main(int argc, char **argv);
 
@@ -55,9 +55,10 @@ char		*ft_itoa(int n);
 int			check_numbers(char **argv);
 
 /*list_maker.c*/
-t_threads	make_list(t_struct *data);
+//t_threads	make_list(t_struct *data);
+void		make_list(t_struct *data, t_threads **philo);
 void		*make_nod(int num);
-void		add_nod(t_list *head, t_list *new);
-void		free_list(t_list *head);
+void		add_nod(t_threads *head, t_threads *new);
+void		free_list(t_threads *head);
 
 #endif
