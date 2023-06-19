@@ -6,7 +6,7 @@
 #    By: pineau <pineau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:55:40 by pineau            #+#    #+#              #
-#    Updated: 2023/06/14 15:08:51 by pineau           ###   ########.fr        #
+#    Updated: 2023/06/19 17:36:45 by pineau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,9 @@ SRC	= \
 		utils.c\
 		check_args.c\
 		list_maker.c\
+		action.c\
+		threads.c\
+		
 		
 		
 	

@@ -6,17 +6,28 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/18 17:03:02 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:10:03 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void	circular(t_threads **philo)
+{
+	t_threads	*current;
+
+	current = *philo;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = *philo;
+	(*philo)->prev = current;
+}
+
 void	make_list(t_struct *data, t_threads **philo)
 {
-	int			i;
+	int	i;
 
-	i = 0;
+	i = 1;
 	*philo = make_nod(i);
 	while (++i <= data->philo)
 		add_nod(*philo, make_nod(i));
@@ -49,12 +60,15 @@ void	free_list(t_threads *head)
 {
 	t_threads	*current;
 	t_threads	*next;
+	int			i;
 
+	i = head->philo;
 	current = head;
-	while (current != NULL)
+	while (i < head->philo)
 	{
 		next = current->next;
 		free(current);
 		current = next;
+		i++;
 	}
 }
