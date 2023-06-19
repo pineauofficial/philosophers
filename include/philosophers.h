@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/14 16:35:43 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/18 18:18:12 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@
 # include <string.h>
 # include <pthread.h>
 # include <stddef.h>
+# include <sys/time.h>
 
 typedef struct s_threads
 {
 	int					num;
 	pthread_t			thread;
 	struct s_threads	*next;
+	struct s_threads	*prev;
+	long int			last_eat;
+	long int			time;
+	int					philo;
+	int					fork;
+	int					tt_die;
+	int					tt_eat;
+	int					tt_sleep;
 }	t_threads;
 
 typedef struct s_struct
@@ -35,11 +44,13 @@ typedef struct s_struct
 	int				tt_eat;
 	int				tt_sleep;
 	pthread_mutex_t	mutex;
+	struct timeval	start;
 }	t_struct;
 
 /*---------MANDATORY---------*/
 
 /*main.c*/
+int			threads_join(t_threads **philo, t_struct *data);
 void		philosophers(t_struct *data, t_threads **philo);
 void		init(char **argv);
 int			main(int argc, char **argv);
@@ -55,7 +66,6 @@ char		*ft_itoa(int n);
 int			check_numbers(char **argv);
 
 /*list_maker.c*/
-//t_threads	make_list(t_struct *data);
 void		make_list(t_struct *data, t_threads **philo);
 void		*make_nod(int num);
 void		add_nod(t_threads *head, t_threads *new);

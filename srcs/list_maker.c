@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/14 16:44:28 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/18 17:03:02 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	add_nod(t_threads *head, t_threads *new)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new;
+	new->prev = current;
 }
 
 void	free_list(t_threads *head)
