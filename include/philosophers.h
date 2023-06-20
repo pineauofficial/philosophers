@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/19 18:22:11 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/20 16:26:36 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_threads
 	int					tt_die;
 	int					tt_eat;
 	int					tt_sleep;
+	int					death;
+	int					end;
 }	t_threads;
 
 typedef struct s_struct
@@ -50,9 +52,8 @@ typedef struct s_struct
 /*---------MANDATORY---------*/
 
 /*main.c*/
+void		routine(t_threads **philo);
 void		philosophers(t_struct *data, t_threads **philo);
-void		init_suite(t_threads **philo);
-void		init(char **argv);
 void		end(t_struct *data, t_threads *philo);
 int			main(int argc, char **argv);
 
@@ -74,14 +75,17 @@ void		add_nod(t_threads *head, t_threads *new);
 void		free_list(t_threads *head);
 
 /*action.c*/
-void		routine(t_threads **philo);
 long int	get_time(long time);
-void		eating(t_threads **philo);
+int			eating(t_threads **philo);
 int			thinking(t_threads **philo);
 int			sleeping(t_threads **philo);
 
 /*threads.c*/
 int			threads_join(t_threads **philo, t_struct *data);
 void		set_time(t_struct *data, t_threads **philo);
+
+/*init.c*/
+void		init_suite(t_threads **philo);
+void		init(char **argv);
 
 #endif
