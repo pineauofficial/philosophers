@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/20 16:30:34 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/21 18:26:14 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,30 @@ void	routine(t_threads **philo)
 		if (sleeping(&current) == 0)
 			break ;
 	}
-	printf("%d is dead \xF0\x9F\x98\xB5\n", current->num);
+	if (*current->death == 1)
+	{
+		printf("LALALAL");
+		return ;
+	}
+	dying(&current);
+	*current->death = 1;
 }
 
 void	philosophers(t_struct *data, t_threads **philo)
 {
 	int			i;
 	int			ptc;
+	int			end;
 	t_threads	*current;
 
 	current = *philo;
 	set_time(data, philo);
 	circular(philo);
+	end = 0;
 	i = 0;
 	while (i++ < data->philo)
 	{
+		current->death = &end;
 		ptc = pthread_create(&current->thread, NULL, (void *)routine, current);
 		current = current->next;
 		if (ptc != 0)

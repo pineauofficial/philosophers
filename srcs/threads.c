@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:28:25 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/20 15:17:30 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/21 15:38:46 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	threads_join(t_threads **philo, t_struct *data)
 
 void	set_time(t_struct *data, t_threads **philo)
 {
-	t_threads		*current;
 	struct timeval	start;
 	int				i;
+	t_threads		*current;
 
 	current = *philo;
 	gettimeofday(&start, NULL);

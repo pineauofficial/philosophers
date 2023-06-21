@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:05:20 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/20 16:29:06 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/21 14:40:09 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init(char **argv)
 	philo->tt_die = ft_atoi(argv[2]);
 	philo->tt_eat = ft_atoi(argv[3]);
 	philo->tt_sleep = ft_atoi(argv[4]);
-	philo->end = 0;
+	//philo->end = 0;
 	init_suite(&philo);
 	philosophers(data, &philo);
 	end(data, philo);

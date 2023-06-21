@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/20 16:26:36 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:07:37 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_threads
 	int					tt_die;
 	int					tt_eat;
 	int					tt_sleep;
-	int					death;
-	int					end;
+	int					*death;
+	pthread_mutex_t		dead;
 }	t_threads;
 
 typedef struct s_struct
@@ -75,6 +75,7 @@ void		add_nod(t_threads *head, t_threads *new);
 void		free_list(t_threads *head);
 
 /*action.c*/
+void		dying(t_threads **philo);
 long int	get_time(long time);
 int			eating(t_threads **philo);
 int			thinking(t_threads **philo);
