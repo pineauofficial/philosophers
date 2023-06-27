@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/21 15:39:01 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/27 18:27:21 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	make_list(t_struct *data, t_threads **philo)
 	*philo = make_nod(i);
 	while (++i <= data->philo)
 		add_nod(*philo, make_nod(i));
+	circular(philo);
 }
 
 void	*make_nod(int num)

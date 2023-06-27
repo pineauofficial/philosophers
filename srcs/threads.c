@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:28:25 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/21 15:38:46 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/27 17:37:31 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	set_time(t_struct *data, t_threads **philo)
 {
 	struct timeval	start;
 	int				i;
-	t_threads		*current;
 
-	current = *philo;
 	gettimeofday(&start, NULL);
 	i = 0;
 	while (i++ < data->philo)
 	{
-		current->time = (start.tv_sec * 1000) + (start.tv_usec / 1000);
-		current = current->next;
+		(*philo)->time = (start.tv_sec * 1000) + (start.tv_usec / 1000);
+		(*philo) = (*philo)->next;
 	}
+	(*philo) = (*philo)->next;
 }
