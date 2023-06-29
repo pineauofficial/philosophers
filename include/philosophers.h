@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/27 18:16:00 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:19:18 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_struct
 	pthread_mutex_t	mutex;
 	struct timeval	start;
 }	t_struct;
+
+typedef struct s_data
+{
+	pthread_mutex_t		deadtmp;
+	pthread_mutex_t		locktmp;	
+}	t_data;
 
 /*---------MANDATORY---------*/
 

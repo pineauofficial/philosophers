@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/27 17:39:34 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:26:32 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	philosophers(t_struct *data, t_threads **philo)
 
 	current = *philo;
 	set_time(data, philo);
-	
-	// circular(philo);
 	end = 0;
 	i = 0;
 	while (i++ < data->philo)

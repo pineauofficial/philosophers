@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:45:55 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/27 17:20:45 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:39:48 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	eating(t_threads **philo)
 	if (mutex_death(philo) == 0)
 		return (0);
 	if (((*philo)->last_eat - (*philo)->time) > (*philo)->tt_die)
-	{
-		printf("time eating : %ld\n", (*philo)->last_eat - (*philo)->time);
 		return (0);
-	}
 	pthread_mutex_lock(&(*philo)->fork);
 	if (mutex_death(philo) == 0)
 	{
@@ -66,15 +63,10 @@ int	thinking(t_threads **philo)
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	if ((*(*philo)->death) == 1)
-	{
-		printf("thinking : %d", (*philo)->num);
+	if (mutex_death(philo) == 0)
 		return (0);
-	}
-	printf("%ld %d is thinking \xF0\x9F\xA4\x94\n", \
-		(time.tv_sec * 1000) + (time.tv_usec / 1000)
-		- (*philo)->time, (*philo)->num);
-	// usleep(((*philo)->tt_die - ((*philo)->tt_eat + (*philo)->tt_sleep)) / 2);
+	mutex_printf(philo, 3);
+	usleep(((*philo)->tt_die - ((*philo)->tt_eat + (*philo)->tt_sleep)) / 2);
 	return (1);
 }
 

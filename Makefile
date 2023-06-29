@@ -6,7 +6,7 @@
 #    By: pineau <pineau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:55:40 by pineau            #+#    #+#              #
-#    Updated: 2023/06/27 15:30:34 by pineau           ###   ########.fr        #
+#    Updated: 2023/06/27 18:47:48 by pineau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= philosophers
 
 CC	= gcc
 
-CFLAGS	= -Werror -Wextra -Wall -g3 -lpthread -D_REENTRANT
+CFLAGS	= -Werror -Wextra -Wall -g3
 
 INC	= -I ./include/
 

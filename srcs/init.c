@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:05:20 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/27 18:30:20 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:29:05 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 t_threads	*init_suite(t_threads *philo)
 {
 	int					i;
-	pthread_mutex_t		deadtmp;
-	pthread_mutex_t		locktmp;
+	t_data				*data;
 
-	pthread_mutex_init(&deadtmp, NULL);
-	pthread_mutex_init(&locktmp, NULL);
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	pthread_mutex_init(&data->deadtmp, NULL);
+	pthread_mutex_init(&data->locktmp, NULL);
 	i = 0;
 	while (i++ < (philo)->philo)
 	{
-		printf("philo num = %d\n", (philo)->num);
 		pthread_mutex_init(&(philo)->fork, NULL);
-		(philo)->dead = &deadtmp;
-		(philo)->lock = &locktmp;
-		(philo) = (philo)->next;
+		philo->dead = &data->deadtmp;
+		philo->lock = &data->locktmp;
+		philo = philo->next;
 	}
-	printf("philo actuel = %d\n", (philo)->num);
 	return (philo);
 }
 
@@ -59,9 +59,6 @@ void	init(char **argv)
 		philo = philo->next;
 	}
 	philo = init_suite(philo);
-	pthread_mutex_lock(philo->dead);
-	pthread_mutex_unlock(philo->dead);
-	exit(0);
 	philosophers(data, &philo);
 	end(data, philo);
 }

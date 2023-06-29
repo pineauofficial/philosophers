@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:52:27 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/27 16:53:26 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:51:43 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	mutex_printf(t_threads **philo, int mode)
 	pthread_mutex_lock((*philo)->lock);
 	if (mode == 1)
 		printf("%ld %d is dead \xF0\x9F\x98\xB5\n", \
-		((*philo)->last_eat - (*philo)->time), (*philo)->num);
+		get_time((*philo)->time), (*philo)->num);
 	if (mode == 2)
 		printf("%ld %d has taken a fork \xF0\x9F\x8D\xB4\n", \
-		(*philo)->last_eat - (*philo)->time, (*philo)->num);
-	// if (mode == 3)
-	// 	(void);
+		get_time((*philo)->time), (*philo)->num);
+	if (mode == 3)
+		printf("%ld %d is thinking \xF0\x9F\xA4\x94\n", \
+		get_time((*philo)->time), (*philo)->num);
 	if (mode == 4)
 		printf("%ld %d is sleeping \xF0\x9F\x98\xB4\n", \
 		get_time((*philo)->time), (*philo)->num);
