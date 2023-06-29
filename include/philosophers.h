@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 11:19:18 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 13:29:01 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		add_nod(t_threads *head, t_threads *new);
 void		free_list(t_threads *head);
 
 /*action.c*/
-void		dying(t_threads **philo);
+
 long int	get_time(long time);
 int			eating(t_threads **philo);
 int			thinking(t_threads **philo);
@@ -92,7 +92,7 @@ int			threads_join(t_threads **philo, t_struct *data);
 void		set_time(t_struct *data, t_threads **philo);
 
 /*init.c*/
-t_threads		*init_suite(t_threads *philo);
+t_threads	*init_suite(t_threads *philo);
 void		init(char **argv);
 
 /*mutex.c*/

@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 11:26:32 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 13:28:45 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	routine(t_threads **philo)
 	{
 		if (eating(&current) == 0)
 			break ;
-		if (thinking(&current) == 0)
-			break ;
 		if (sleeping(&current) == 0)
+			break ;
+		if (thinking(&current) == 0)
 			break ;
 	}
 	if (*current->death == 1)
 		return ;
-	dying(&current);
 	*current->death = 1;
+	mutex_printf(philo, 1);
 }
 
 void	philosophers(t_struct *data, t_threads **philo)
