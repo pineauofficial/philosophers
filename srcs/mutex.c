@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:52:27 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 11:51:43 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/02 19:12:15 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	mutex_death(t_threads **philo)
 	return (1);
 }
 
+
 void	mutex_printf(t_threads **philo, int mode)
 {
 	pthread_mutex_lock((*philo)->lock);
@@ -38,6 +39,9 @@ void	mutex_printf(t_threads **philo, int mode)
 		get_time((*philo)->time), (*philo)->num);
 	if (mode == 4)
 		printf("%ld %d is sleeping \xF0\x9F\x98\xB4\n", \
+		get_time((*philo)->time), (*philo)->num);
+	if (mode == 5)
+		printf("%ld %d is eating \xF0\x9F\x8D\x94\n", \
 		get_time((*philo)->time), (*philo)->num);
 	pthread_mutex_unlock((*philo)->lock);
 }

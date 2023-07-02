@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:28:25 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 13:45:01 by pineau           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:39:49 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	set_time(t_struct *data, t_threads **philo)
 	while (i++ < data->philo)
 	{
 		(*philo)->time = (start.tv_sec * 1000) + (start.tv_usec / 1000);
-		(*philo)->last_eat = (*philo)->time;
+		(*philo)->last_eat = 0;
 		(*philo) = (*philo)->next;
 	}
 	(*philo) = (*philo)->next;
