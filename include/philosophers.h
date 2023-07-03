@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 13:29:01 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:15:12 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct s_struct
 typedef struct s_data
 {
 	pthread_mutex_t		deadtmp;
-	pthread_mutex_t		locktmp;	
+	pthread_mutex_t		locktmp;
+	int					end;	
 }	t_data;
 
 /*---------MANDATORY---------*/
@@ -60,7 +61,7 @@ typedef struct s_data
 /*main.c*/
 void		routine(t_threads **philo);
 void		philosophers(t_struct *data, t_threads **philo);
-void		end(t_struct *data, t_threads *philo);
+void		end(t_struct *data, t_threads *philo, t_data *data2);
 int			main(int argc, char **argv);
 
 /*utils.c*/
@@ -92,8 +93,10 @@ int			threads_join(t_threads **philo, t_struct *data);
 void		set_time(t_struct *data, t_threads **philo);
 
 /*init.c*/
-t_threads	*init_suite(t_threads *philo);
 void		init(char **argv);
+void		*init_data(t_struct **data, char **argv);
+void		*init_pointers(t_data **pointers, t_threads *philo);
+t_threads	*init_philo(t_threads *philo, t_struct *data, char **argv);
 
 /*mutex.c*/
 int			mutex_death(t_threads **philo);

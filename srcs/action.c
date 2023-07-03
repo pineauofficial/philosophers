@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:45:55 by pineau            #+#    #+#             */
-/*   Updated: 2023/07/02 19:21:56 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/03 10:34:33 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	eating(t_threads **philo)
 		return (0);
 	}
 	pthread_mutex_lock(&(*philo)->next->fork);
+	if (mutex_death(philo) == 0)
+		return (0);/*pas sur*/
 	mutex_printf(philo, 2);
 	if (mutex_death(philo) == 0)
 	{
@@ -42,6 +44,8 @@ int	eating(t_threads **philo)
 		return (0);
 	}
 	(*philo)->last_eat = get_time((*philo)->time);
+	if (mutex_death(philo) == 0)
+		return (0);/*pas sur*/
 	mutex_printf(philo, 2);
 	mutex_printf(philo, 5);
 	if ((*philo)->tt_eat > (*philo)->tt_die)

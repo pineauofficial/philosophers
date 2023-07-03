@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:02:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 13:28:45 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:29:12 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,13 @@ void	philosophers(t_struct *data, t_threads **philo)
 {
 	int			i;
 	int			ptc;
-	int			end;
 	t_threads	*current;
 
 	current = *philo;
 	set_time(data, philo);
-	end = 0;
 	i = 0;
 	while (i++ < data->philo)
 	{
-		current->death = &end;
 		ptc = pthread_create(&current->thread, NULL, (void *)routine, current);
 		current = current->next;
 		if (ptc != 0)
@@ -56,7 +53,7 @@ void	philosophers(t_struct *data, t_threads **philo)
 		return ;
 }
 
-void	end(t_struct *data, t_threads *philo)
+void	end(t_struct *data, t_threads *philo, t_data *pointers)
 {
 	int			i;
 
@@ -64,6 +61,7 @@ void	end(t_struct *data, t_threads *philo)
 	while (i++ < philo->philo)
 		pthread_mutex_destroy(&philo->fork);
 	free(data);
+	free(pointers);
 	free_list(philo);
 }
 
