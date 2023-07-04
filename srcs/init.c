@@ -6,25 +6,11 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:05:20 by pineau            #+#    #+#             */
-/*   Updated: 2023/07/03 12:28:34 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/04 18:03:16 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	init(char **argv)
-{
-	t_struct	*data;
-	t_threads	*philo;
-	t_data		*pointers;
-
-	init_data(&data, argv);
-	make_list(data, &philo);
-	philo = init_philo(philo, data, argv);
-	init_pointers(&pointers, philo);
-	philosophers(data, &philo);
-	end(data, philo, pointers);
-}
 
 void	*init_data(t_struct **data, char **argv)
 {
@@ -35,12 +21,10 @@ void	*init_data(t_struct **data, char **argv)
 	(*data)->tt_die = ft_atoi(argv[2]);
 	(*data)->tt_eat = ft_atoi(argv[3]);
 	(*data)->tt_sleep = ft_atoi(argv[4]);
-	if ((*data)->philo > 1024)
-		return (NULL);
 	return (NULL);
 }
 
-t_threads	*init_philo(t_threads *philo, t_struct *data, char **argv)
+t_threads	*init_philo(int argc, t_threads *philo, t_struct *data, char **argv)
 {
 	int	i;
 
@@ -51,6 +35,11 @@ t_threads	*init_philo(t_threads *philo, t_struct *data, char **argv)
 		philo->tt_die = ft_atoi(argv[2]);
 		philo->tt_eat = ft_atoi(argv[3]);
 		philo->tt_sleep = ft_atoi(argv[4]);
+		philo->actual_eat = 0;
+		if (argc == 6)
+			philo->nbr_eat = ft_atoi(argv[5]);
+		else
+			philo->nbr_eat = -1;
 		philo = philo->next;
 	}
 	return (philo);
@@ -76,4 +65,18 @@ void	*init_pointers(t_data **pointers, t_threads *philo)
 		philo = philo->next;
 	}
 	return (NULL);
+}
+
+void	init(int argc, char **argv)
+{
+	t_struct	*data;
+	t_threads	*philo;
+	t_data		*pointers;
+
+	init_data(&data, argv);
+	make_list(data, &philo);
+	philo = init_philo(argc, philo, data, argv);
+	init_pointers(&pointers, philo);
+	philosophers(data, &philo);
+	end(data, philo, pointers);
 }

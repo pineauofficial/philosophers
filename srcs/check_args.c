@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:04:52 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/02 16:08:13 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/04 15:08:52 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_args(int argc, char **argv)
 	int	i;
 
 	i = 1;
-	if (argc != 5)
+	if (argc != 5 && argc != 6)
 		return (0);
 	if (check_numbers(argv) == 1)
 		return (0);

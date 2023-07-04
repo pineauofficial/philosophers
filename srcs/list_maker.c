@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:36 by pineau            #+#    #+#             */
-/*   Updated: 2023/07/03 12:37:00 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/04 16:06:45 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ void	free_list(t_threads *philo)
 		free(philo->prev);
 		i--;
 	}
-	printf("%d\n", philo->num);
 	free(philo);
 }

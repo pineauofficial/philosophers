@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:28:25 by pineau            #+#    #+#             */
-/*   Updated: 2023/06/29 17:39:49 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/04 17:01:45 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,4 @@ void	set_time(t_struct *data, t_threads **philo)
 		(*philo)->last_eat = 0;
 		(*philo) = (*philo)->next;
 	}
-	(*philo) = (*philo)->next;
 }

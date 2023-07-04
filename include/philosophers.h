@@ -6,7 +6,7 @@
 /*   By: pineau <pineau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:58:08 by pineau            #+#    #+#             */
-/*   Updated: 2023/07/03 12:15:12 by pineau           ###   ########.fr       */
+/*   Updated: 2023/07/04 19:01:23 by pineau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_threads
 	int					*death;
 	pthread_mutex_t		*dead;
 	pthread_mutex_t		*lock;
+	int					nbr_eat;
+	int					actual_eat;
 }	t_threads;
 
 typedef struct s_struct
@@ -60,8 +62,10 @@ typedef struct s_data
 
 /*main.c*/
 void		routine(t_threads **philo);
+void		solo_routine(t_threads **philo);
 void		philosophers(t_struct *data, t_threads **philo);
 void		end(t_struct *data, t_threads *philo, t_data *data2);
+int			check_eat(t_threads **philo);
 int			main(int argc, char **argv);
 
 /*utils.c*/
@@ -84,7 +88,9 @@ void		free_list(t_threads *head);
 /*action.c*/
 
 long int	get_time(long time);
-int			eating(t_threads **philo);
+int			eating_part1_part1(t_threads **philo);
+int			eating_part1(t_threads **philo);
+int			eating_part2(t_threads **philo);
 int			thinking(t_threads **philo);
 int			sleeping(t_threads **philo);
 
@@ -93,10 +99,11 @@ int			threads_join(t_threads **philo, t_struct *data);
 void		set_time(t_struct *data, t_threads **philo);
 
 /*init.c*/
-void		init(char **argv);
+void		init(int argc, char **argv);
 void		*init_data(t_struct **data, char **argv);
 void		*init_pointers(t_data **pointers, t_threads *philo);
-t_threads	*init_philo(t_threads *philo, t_struct *data, char **argv);
+t_threads	*init_philo(int argc, t_threads *philo,
+				t_struct *data, char **argv);
 
 /*mutex.c*/
 int			mutex_death(t_threads **philo);
